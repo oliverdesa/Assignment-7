@@ -8,5 +8,10 @@ most.probable.value <- function(vector){
 }
 
 nonpara.bs <- function(vector, n){
+  my.mode <- function(vector, i) return(most.probable.value(vector[i]))
+  boot.data <- boot(data = vector, statistic = my.mode,
+                    R = 2000)
+  
+ # my.mode <- function(vector, i) return(most.probable.value(vector[i]))
   
 }
