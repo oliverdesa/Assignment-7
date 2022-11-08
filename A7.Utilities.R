@@ -20,12 +20,20 @@ nonpara.bs <- function(vector, n){
 
 ang.diff.CI <- function(k, m, n){
   all.ks <- seq(2, k)
-  get.CI <- function(k, m, n){
+  all.test.stats <- rep(0, length(all.ks))
+  bca.lower <- rep(0, length(all.ks))
+  bca.upper <- rep(0, length(all.ks))
+  for (i in all.ks) {
     null.dists <- sim.null.hypo(k, m)
     null.boot.data <- nonpara.bs(null.dists, n)
+    all.test.stats[i] <- null.boot.data$t0
     conf.intervals <- boot.ci(null.boot.data)
-    return(conf.intervals)
+    bca.lower[i] <- conf.intervals$bca[4]
+    bca.upper[i] <- conf.intervals$bc[5]
   }
-  all.CIs <- sapply(all.ks, getCI)
+  plotting.data <- data.frame(all.ks, all.test.stats[2:5], bca.lower[2:5],
+                              bca.upper[2:5])
   
+  # all.CIs <- sapply(all.ks, get.CI, m=m, n=n)
+  #return(conf.intervals$bca)
 }
