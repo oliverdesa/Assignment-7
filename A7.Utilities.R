@@ -1,3 +1,9 @@
+# Name: Oliver De Sa
+# SciNet username: tmp_odesa
+# Description:
+#   Functions to be used for Assignment 7
+
+
 source('C:/Users/Oliver/MSC1090/assignment7/Circle.Utilities.R')
 library(boot)
 
@@ -33,7 +39,13 @@ ang.diff.CI <- function(k, m, n){
   }
   plotting.data <- data.frame(all.ks, all.test.stats[2:5], bca.lower[2:5],
                               bca.upper[2:5])
+  return(plotting.data)
   
   # all.CIs <- sapply(all.ks, get.CI, m=m, n=n)
   #return(conf.intervals$bca)
+}
+
+plot.CIs <- function(dataframe){
+  plot(all.test.stats.2.5. ~ all.ks, data = dataframe)
+  
 }
