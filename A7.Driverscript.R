@@ -9,7 +9,9 @@ args <- commandArgs(trailingOnly = TRUE)
 
 # add defensive
 
-CI.df <- angle.diff.CI(args, 1000, 2000)
+CI.df <- ang.diff.CI(args, 1000, 2000)
+
+plot.CIs(CI.df)
 
 
 

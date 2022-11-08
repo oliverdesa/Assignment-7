@@ -6,9 +6,10 @@
 
 source('C:/Users/Oliver/MSC1090/assignment7/Circle.Utilities.R')
 library(boot)
+library(ggplot2)
 
 most.probable.value <- function(vector){
-  p.dist <- hist(vector, breaks = 41, freq = TRUE)
+  p.dist <- hist(vector, breaks = 41, freqs = TRUE, plot = FALSE)
   midPoint <- p.dist$mids[p.dist$counts == max(p.dist$counts)]
   # midPoint <- p.dist$mids[abs((p.dist$density) - max(p.dist$density)) < 1e-10]
   return(midPoint[1])
@@ -41,11 +42,12 @@ ang.diff.CI <- function(k, m, n){
                               bca.upper[2:5])
   return(plotting.data)
   
-  # all.CIs <- sapply(all.ks, get.CI, m=m, n=n)
-  #return(conf.intervals$bca)
 }
 
 plot.CIs <- function(dataframe){
-  plot(all.test.stats.2.5. ~ all.ks, data = dataframe)
+  ggplot(dataframe, aes(all.ks, all.test.stats.2.5.)) +
+    geom_point() +
+    geom_errorbar(aes(ymin = bca.lower.2.5., ymax = bca.upper.2.5.))
   
 }
+
