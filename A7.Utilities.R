@@ -11,7 +11,7 @@ library(ggplot2)
 # Function takes a vector of numeric values and returns the most probable values
 most.probable.value <- function(vector){
   #analyze data in a histogram
-  p.dist <- hist(vector, breaks = 41, freqs = TRUE, plot = FALSE)
+  p.dist <- hist(vector, breaks = 41, plot = FALSE)
   # Retreive the midpoint of the bin containing the most probable value
   midPoint <- p.dist$mids[p.dist$counts == max(p.dist$counts)]
   return(midPoint[1])
